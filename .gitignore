@@ -1,0 +1,16 @@
+# Entorno virtual
+.venv/
+env/
+venv/
+
+# dbt
+logs/
+target/
+dbt_packages/
+
+# VS Code
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
