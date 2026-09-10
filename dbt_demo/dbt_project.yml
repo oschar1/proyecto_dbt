@@ -34,3 +34,37 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+
+raw:
+  +materialized: table
+  +schema: raw
+  +s3_data_dir: s3://ole-datalake-prod-raw-us-east-2/
+  +s3_staging_dir: s3://ole-athena-results-prod-us-east-2/dbt/raw/
+  +incremental_strategy: insert_overwrite
+  +table_type: hive
+  +format: parquet
+  +write_compression: snappy
+
+intermediate:
+  +materialized: table
+  +schema: int
+  +s3_data_dir: s3://ole-datalake-prod-int-us-east-2/
+  +s3_staging_dir: s3://ole-athena-results-prod-us-east-2/dbt/int/
+  +incremental_strategy: insert_overwrite
+  +table_type: hive
+  +format: parquet
+  +write_compression: snappy
+
+marts:
+  +materialized: table
+  +schema: marts
+  +s3_data_dir: s3://ole-datalake-prod-marts-us-east-2/
+  +s3_staging_dir: s3://ole-athena-results-prod-us-east-2/dbt/marts/
+  +incremental_strategy: insert_overwrite
+  +table_type: hive
+  +format: parquet
+  +write_compression: snappy
+
+sync:
+  +materialized: table
+  +schema: sync
