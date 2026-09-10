@@ -1,5 +1,6 @@
 
 {{ config(materialized='table') }}
+--no olvidar de declarar la variable parametro.
 {% set prioridades = var('prioridades') %}
 
 SELECT
