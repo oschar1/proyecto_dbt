@@ -31,21 +31,12 @@ with DAG(
     description="A first DAG explaining Airflow Concepts",
 ) as dag:
 
-# Tasks
+    # Tasks
     start_task = BashOperator(
         task_id="start_task",
         bash_command="echo 'Starting the daily workflow'",
     )
 	
-data_processing_task = PythonOperator(
-	task_id="data_processing_task",
-	python_callable=process_data,
-)
-
-report_generation_task = PythonOperator(
-	task_id="report_generation_task",
-	python_callable=generate_report,
-)	
 data_processing_task = PythonOperator(
 	task_id="data_processing_task",
 	python_callable=process_data,
@@ -71,7 +62,8 @@ cleanup_task = BashOperator(
 	# Basic chaining
 start_task >> data_processing_task
 	
+# Cross downstream ---> If you want to make a list of tasks depend on another list of tasks
+cross_downstream([data_processing_task], [report_generation_task, archive_data_task])
 
-
-	# Chain for complex dependencies
+# Chain for complex dependencies
 chain(report_generation_task, send_notification_task, cleanup_task)	
